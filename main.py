@@ -1,4 +1,4 @@
-def getCourses(core):
+def get_courses(core):
     #4400 is the value for Fall Quarter 2022.
     url = "https://www.scu.edu/apps/ws/courseavail/search/4400/ugrad"
 
