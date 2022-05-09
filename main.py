@@ -52,7 +52,7 @@ if __name__ == '__main__':
         print("Fetching " + coreDict[core] + " . . .")
 
         #Fetch course data and add it to dict
-        data = getCourses(core)
+        data = get_courses(core)
         for info in data["results"]:
             if info['class_nbr'] in courses:
                 newCore = courses.get(info['class_nbr']).get("core") + ", " + coreDict[core]
