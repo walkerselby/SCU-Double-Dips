@@ -65,6 +65,7 @@ if __name__ == '__main__':
                 }
                 courses.update({info['class_nbr']: newCourse})
 
+    print("\nDouble Dip Courses:\n")
     for course in courses:
         #Checking if there are multiple cores for a course.
         if "," in courses.get(course).get("core"):
