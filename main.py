@@ -85,15 +85,23 @@ if __name__ == "__main__":
                 newCore = f"{courses.get(info['class_nbr']).get('core')}, {coreDict[core]}"
                 courses.get(info["class_nbr"]).update({"core": newCore})
             else:
+                if info["mtg_time_end_1"] == "":
+                    final_days_times = "TBA"
+                else:
+                    final_days_times = f"{info['mtg_days_1']} {info['mtg_time_beg_1']} - {info['mtg_time_end_1']}"
                 newCourse = {
-                    "course": f"{info['subject']} {info['catalog_nbr']} ({info['class_nbr']})",
-                    "name": info["class_descr"],
-                    "core": coreDict[core]
+                    "class": f"{info['subject']} {info['catalog_nbr']} ({info['class_nbr']})",
+                    "description": info["class_descr"],
+                    "core": coreDict[core],
+                    "days-times": final_days_times,
+                    "room": f"{info['mtg_facility_1'] or 'TBA' }",
+                    "instructor": f"{info['instr_1'] or 'TBA' }",
+                    "units": info["units_minimum"]
                 }
                 courses.update({info["class_nbr"]: newCourse})
 
 
-    rows = ["COURSE TAG", "COURSE NAME", "CORES SATISFIED"] 
+    rows = ["CLASS", "DESCRIPTION", "CORES SATISFIED", "DAYS/TIMES", "ROOM", "INSTRUCTOR", "UNITS"] 
 
     with open("scu_double_dips-fall_2022.csv", "w") as csv_file: 
         csv_writer = csv.writer(csv_file)
@@ -104,6 +112,7 @@ if __name__ == "__main__":
             # Checking if there are multiple cores for a course.
             if "," in courses.get(course).get("core"):   
     
-                main_stuff =  [ courses.get(course).get("course"), courses.get(course).get("name"), courses.get(course).get("core") ]
+                main_stuff =  [ courses.get(course).get("class"), courses.get(course).get("description"), courses.get(course).get("core"), courses.get(course).get("days-times"), courses.get(course).get("room"), courses.get(course).get("instructor"), courses.get(course).get("units") ]
                 
-                csv_writer.writerow([main_stuff[0], main_stuff[1], main_stuff[2]]) # write each item
+                for stuff in main_stuff: 
+                    csv_writer.writerow([main_stuff[0], main_stuff[1], main_stuff[2], main_stuff[3], main_stuff[4], main_stuff[5], main_stuff[6]]) # write each item
