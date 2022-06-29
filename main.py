@@ -1,11 +1,16 @@
 import csv 
 import requests
-import os
+import os 
 
-def get_courses(core):
-    # 4400 is the value for Fall Quarter 2022.
-    url = "https://www.scu.edu/apps/ws/courseavail/search/4400/ugrad"
+# 4300 is for Fall Quarter 2022.
+# 4320 is for Winter Quarter 2022
+# 4340 is for Spring Quarter 2022.
+# 4360 is for Summer Quarter 2022.
+# 4400 is the value for Fall Quarter 2022.
+ 
+url = f"https://www.scu.edu/apps/ws/courseavail/search/4400/ugrad"
 
+def get_courses(core): 
     payload = f"newcore={core}&maxRes=10000"
     headers = {
         "authority": "www.scu.edu",
@@ -24,9 +29,8 @@ def get_courses(core):
     response = requests.request("POST", url, headers=headers, data=payload)
     data = response.json()
     return data
-
-
-if __name__ == "__main__": 
+ 
+if __name__== "__main__":
     courses = {}
 
     # Core Codes
@@ -102,8 +106,8 @@ if __name__ == "__main__":
 
 
     rows = ["CLASS", "DESCRIPTION", "CORES SATISFIED", "DAYS/TIMES", "ROOM", "INSTRUCTOR", "UNITS"] 
-
-    with open("scu_double_dips-fall_2022.csv", "w") as csv_file: 
+ 
+    with open(f"scu_double_dips-4400.csv", "w") as csv_file: 
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(rows) # write header
 
@@ -112,7 +116,7 @@ if __name__ == "__main__":
             # Checking if there are multiple cores for a course.
             if "," in courses.get(course).get("core"):   
     
-                main_stuff =  [ courses.get(course).get("class"), courses.get(course).get("description"), courses.get(course).get("core"), courses.get(course).get("days-times"), courses.get(course).get("room"), courses.get(course).get("instructor"), courses.get(course).get("units") ]
+                main_stuff = [ courses.get(course).get("class"), courses.get(course).get("description"), courses.get(course).get("core"), courses.get(course).get("days-times"), courses.get(course).get("room"), courses.get(course).get("instructor"), courses.get(course).get("units") ]
                 
                 for stuff in main_stuff: 
                     csv_writer.writerow([main_stuff[0], main_stuff[1], main_stuff[2], main_stuff[3], main_stuff[4], main_stuff[5], main_stuff[6]]) # write each item
