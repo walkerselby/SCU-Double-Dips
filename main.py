@@ -8,7 +8,7 @@ import os
 # 4360 is for Summer Quarter 2022.
 # 4400 is the value for Fall Quarter 2022.
  
-url = f"https://www.scu.edu/apps/ws/courseavail/search/4400/ugrad"
+url = "https://www.scu.edu/apps/ws/courseavail/search/4400/ugrad"
 
 def get_courses(core): 
     payload = f"newcore={core}&maxRes=10000"
