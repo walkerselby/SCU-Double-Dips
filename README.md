@@ -1,6 +1,6 @@
-# SCU Double Dips
+# SCU Double Dip Courses Checker
 
-- Hey SCU Engineers! Do you ever feel confused as to which courses to take if you need to fill out university cores as well as major requirements? Well look no further - this little program obtains data from the CourseAvail API and can outputs the latest quarter's double dip classes via CSV file format for easy viewing. It can also pull data from previous quarters as well.
+- Hello there, SCU Engineers! Do you ever get confused about which courses to take when you need to fulfill both university cores and major requirements? Look no further - this small program retrieves data from the CourseAvail API and outputs the most recent quarter's double dip classes in CSV format for easy viewing. It can also retrieve data from previous quarters.
 
 <p align="center">
     <img width="50%" src="./images/csv-example.png">
@@ -8,9 +8,9 @@
 
 ## Future Updates (Coming Very Soon): 
 
-- Make it with a Python GUI for easy access and for users to download locally as exe. Make it dynamic with computer notifications allowing refreshing very 20, 40, and 60 seconds to update seats which change pretty often. 
+- Create a Python GUI for easy access and allow users to download it locally as an exe. Make it dynamic by allowing computer notifications to refresh every 20, 40, and 60 seconds to update seats that change frequently.
 
-- UI should use colored tags, filtering A-Z, and overall use SCU's color palette. Maybe convert from CSV to PDF format and make the TKinter GUI a PDF viewer opposed to rendering large amounts of CSV data (e.g. onwards of about 4,300 entries!) within the GUI itself. 
+- The UI should use colored tags, A-Z filtering, and the SCU color palette in general. Perhaps convert CSV to PDF format and make the TKinter GUI a PDF viewer instead of rendering large amounts of CSV data (e.g. upwards of 4,300 entries!) within the GUI itself.
 
 <p align="center">
     <img width="50%" src="./images/gui-example.png">
