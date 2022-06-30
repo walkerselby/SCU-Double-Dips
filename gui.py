@@ -10,6 +10,14 @@ import os
 # 4360 is for Summer Quarter 2022.
 # 4400 is the value for Fall Quarter 2022.
  
+quarterMap = {
+        "Fall 2022": "4400",
+        "Summer 2022": "4360",
+        "Spring 2022": "4340",
+        "Winter 2022": "4320",
+        "Fall 2021": "4300"
+}
+
 def get_courses(core, quarterCode):  
     payload = f"newcore={core}&maxRes=10000"
     headers = {
@@ -31,19 +39,7 @@ def get_courses(core, quarterCode):
     return data
 
 def validate():  
-    quarter = c.get()  
-
-    quarterMap = {
-        "Fall 2022": "4400",
-        "Summer 2022": "4360",
-        "Spring 2022": "4340",
-        "Winter 2022": "4320",
-        "Fall 2021": "4300"
-    }
-
-    for key, value in quarterMap.items():
-        if quarter == key:
-            quarter = value
+    quarter = input.get()  
     
     if (quarter == "Select academic quarter:"):
         tkinter.messagebox.showinfo("Invalid Message Alert","Field cannot be left empty!")
@@ -103,7 +99,7 @@ def validate():
             print(f"Fetching {coreDict[core]} . . .")
 
             # Fetch course data and add it to dict
-            data = get_courses(core, quarter)
+            data = get_courses(core, quarterMap.get(quarter))
             for info in data["results"]:
                 if info["class_nbr"] in courses:
                     newCore = f"{courses.get(info['class_nbr']).get('core')}, {coreDict[core]}"
@@ -127,7 +123,7 @@ def validate():
 
         rows = ["CLASS", "DESCRIPTION", "CORES SATISFIED", "DAYS/TIMES", "ROOM", "INSTRUCTOR", "UNITS"] 
     
-        with open(f"scu_double_dips-{quarter}.csv", "w") as csv_file: 
+        with open(f"scu_double_dips-{quarterMap.get(quarter)}.csv", "w") as csv_file: 
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(rows) # write header
 
@@ -154,8 +150,8 @@ if __name__ == "__main__":
     label_1.place(x=70,y=180)
 
     list1 = ["Fall 2022", "Summer 2022", "Spring 2022", "Winter 2022", "Fall 2021"]
-    c=StringVar()
-    droplist=OptionMenu(root,c, *list1)
+    input = StringVar()
+    droplist=OptionMenu(root, input, *list1)
     droplist.config(width=22)
     c.set("Select academic quarter:") 
     droplist.place(x=240,y=180) 
