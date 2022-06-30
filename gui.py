@@ -151,9 +151,9 @@ if __name__ == "__main__":
 
     list1 = ["Fall 2022", "Summer 2022", "Spring 2022", "Winter 2022", "Fall 2021"]
     input = StringVar()
-    droplist=OptionMenu(root, input, *list1)
+    droplist = OptionMenu(root, input, *list1)
     droplist.config(width=22)
-    c.set("Select academic quarter:") 
+    input.set("Select academic quarter:") 
     droplist.place(x=240,y=180) 
 
     Button(root, text="Download",width=20,bg="#FF7C80",fg="white", command = validate).place(x=180,y=280)
