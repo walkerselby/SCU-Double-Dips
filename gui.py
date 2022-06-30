@@ -4,20 +4,20 @@ import csv
 import requests
 import os 
 
-# 4300 is for Fall Quarter 2022.
-# 4320 is for Winter Quarter 2022
-# 4340 is for Spring Quarter 2022.
-# 4360 is for Summer Quarter 2022.
-# 4400 is the value for Fall Quarter 2022.
- 
-quarterMap = {
-        "Fall 2022": "4400",
-        "Summer 2022": "4360",
-        "Spring 2022": "4340",
-        "Winter 2022": "4320",
-        "Fall 2021": "4300"
-}
+# 4300 is the code for Fall Quarter 2022.
+# 4320 is the code for Winter Quarter 2022
+# 4340 is the code for Spring Quarter 2022.
+# 4360 is the code for Summer Quarter 2022.
+# 4400 is the code for Fall Quarter 2022.
 
+quarterMap = {
+    "Fall 2022": "4400",
+    "Summer 2022": "4360",
+    "Spring 2022": "4340",
+    "Winter 2022": "4320",
+    "Fall 2021": "4300"
+}
+  
 def get_courses(core, quarterCode):  
     payload = f"newcore={core}&maxRes=10000"
     headers = {
@@ -38,14 +38,14 @@ def get_courses(core, quarterCode):
     data = response.json()
     return data
 
-def validate():  
+def validateInput():   
     quarter = input.get()  
     
     if (quarter == "Select academic quarter:"):
-        tkinter.messagebox.showinfo("Invalid Message Alert","Field cannot be left empty!")
+        tkinter.messagebox.showinfo("Invalid Message Alert", "The field cannot be left empty!")
 
     else:
-        tkinter.messagebox.showinfo("Success Message","Successfully downloaded!")  
+        tkinter.messagebox.showinfo("Success Message", "Successfully downloaded!")  
         
         courses = {}
 
@@ -131,31 +131,35 @@ def validate():
 
                 # Checking if there are multiple cores for a course.
                 if "," in courses.get(course).get("core"):   
-        
-                    main_stuff = [ courses.get(course).get("class"), courses.get(course).get("description"), courses.get(course).get("core"), courses.get(course).get("days-times"), courses.get(course).get("room"), courses.get(course).get("instructor"), courses.get(course).get("units") ]
-                    
-                    for stuff in main_stuff: 
-                        csv_writer.writerow([main_stuff[0], main_stuff[1], main_stuff[2], main_stuff[3], main_stuff[4], main_stuff[5], main_stuff[6]]) # write each item
+
+                    course_data = []
+
+                    for data_point in courses.get(course):
+                        course_data.append(courses.get(course)[data_point])
+
+                    csv_writer.writerow([data_point for data_point in course_data]) # write each item
+
+            print(f"\n\n=== Finished fetching core requirements for {quarter}! ===\n\n")
 
 if __name__ == "__main__":  
     root = Tk()
     root.resizable(0,0)
     root.geometry("500x350")
-    root.title("SCU Core Double Dips") 
+    root.title("SCU Double Dip Courses Retriever") 
 
-    label_0 = Label(root, text="SCU Core Double Dips",bg="#FF7C80",fg="white",width=20,font=("bold", 20))
+    label_0 = Label(root, text="SCU Core Double Dips", bg="#FF7C80", fg="white", width=20, font=("bold", 20))
     label_0.place(x=90,y=53) 
 
-    label_1 = Label(root, text="Quarter",width=20,font=("bold", 10))
-    label_1.place(x=70,y=180)
+    label_1 = Label(root, text="Quarter", width=20, font=("bold", 10))
+    label_1.place(x=70, y=180)
 
     list1 = ["Fall 2022", "Summer 2022", "Spring 2022", "Winter 2022", "Fall 2021"]
     input = StringVar()
     droplist = OptionMenu(root, input, *list1)
     droplist.config(width=22)
     input.set("Select academic quarter:") 
-    droplist.place(x=240,y=180) 
+    droplist.place(x=240, y=180) 
 
-    Button(root, text="Download",width=20,bg="#FF7C80",fg="white", command = validate).place(x=180,y=280)
+    Button(root, text="Download", width=20, bg="#FF7C80", fg="white", command = validateInput).place(x=180,y=280)
  
     root.mainloop()

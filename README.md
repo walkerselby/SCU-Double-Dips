@@ -1,4 +1,4 @@
-# SCU Double Dip Courses Checker
+# SCU Double Dip Courses Retriever
 
 - Hello there, SCU Engineers! Do you ever get confused about which courses to take when you need to fulfill both university cores and major requirements? Look no further - this small program retrieves data from the CourseAvail API and outputs the most recent quarter's double dip classes in CSV format for easy viewing. It can also retrieve data from previous quarters.
 
@@ -17,5 +17,7 @@
 </p>
 
 ## Credits:
+
+- [Jason Vu (me)](https://github.com/javab3ans)
 
 - [Walker Selby](https://github.com/walkerselby/): Author and Programmer of [original concept](https://github.com/walkerselby/SCU-Double-Dips)
