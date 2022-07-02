@@ -4,7 +4,8 @@ import csv
 import requests
 import os 
 
-# 4300 is the code for Fall Quarter 2022.
+# 4260 is the code for Summer Quarter 2021.
+# 4300 is the code for Fall Quarter 2021.
 # 4320 is the code for Winter Quarter 2022
 # 4340 is the code for Spring Quarter 2022.
 # 4360 is the code for Summer Quarter 2022.
