@@ -15,7 +15,8 @@ quarterMap = {
     "Summer 2022": "4360",
     "Spring 2022": "4340",
     "Winter 2022": "4320",
-    "Fall 2021": "4300"
+    "Fall 2021": "4300",
+    "Summer 2021": "4260" 
 }
   
 def get_courses(core, quarterCode):  
@@ -105,23 +106,20 @@ def validateInput():
                     newCore = f"{courses.get(info['class_nbr']).get('core')}, {coreDict[core]}"
                     courses.get(info["class_nbr"]).update({"core": newCore})
                 else:
-                    if info["mtg_time_end_1"] == "":
-                        final_days_times = "TBA"
-                    else:
-                        final_days_times = f"{info['mtg_days_1']} {info['mtg_time_beg_1']} - {info['mtg_time_end_1']}"
                     newCourse = {
                         "class": f"{info['subject']} {info['catalog_nbr']} ({info['class_nbr']})",
                         "description": info["class_descr"],
                         "core": coreDict[core],
-                        "days-times": final_days_times,
+                        "days-times": f"{info['mtg_days_1']} {info['mtg_time_beg_1']} - {info['mtg_time_end_1']}" if info["mtg_time_end_1"] != "" else "TBA",
                         "room": f"{info['mtg_facility_1'] or 'TBA' }",
                         "instructor": f"{info['instr_1'] or 'TBA' }",
-                        "units": info["units_minimum"]
+                        "units": info["units_minimum"],
+                        "seats": info["seats_remaining"] if int(info["seats_remaining"]) > 0 else "None",
                     }
+
                     courses.update({info["class_nbr"]: newCourse})
 
-
-        rows = ["CLASS", "DESCRIPTION", "CORES SATISFIED", "DAYS/TIMES", "ROOM", "INSTRUCTOR", "UNITS"] 
+        rows = ["CLASS", "DESCRIPTION", "CORES SATISFIED", "DAYS/TIMES", "ROOM", "INSTRUCTOR", "UNITS", "SEATS REMAINING"] 
     
         with open(f"scu_double_dips-{quarterMap.get(quarter)}.csv", "w") as csv_file: 
             csv_writer = csv.writer(csv_file)
@@ -153,7 +151,7 @@ if __name__ == "__main__":
     label_1 = Label(root, text="Quarter", width=20, font=("bold", 10))
     label_1.place(x=70, y=180)
 
-    list1 = ["Fall 2022", "Summer 2022", "Spring 2022", "Winter 2022", "Fall 2021"]
+    list1 = quarterMap.keys()
     input = StringVar()
     droplist = OptionMenu(root, input, *list1)
     droplist.config(width=22)
