@@ -11,6 +11,17 @@ import os
 # 4360 is the code for Summer Quarter 2022.
 # 4400 is the code for Fall Quarter 2022.
 
+"""
+
+1. We first define a dictionary called quarterMap which maps the academic quarter to the quarter code.
+2. We then define a function called get_courses which takes in the core code and the quarter code.
+3. We then use the requests library to make a POST request to the SCU website.
+4. We then use the json library to parse the response.
+5. We then return the data from the response.
+6. We then define a function called validateInput which takes in the user input.
+
+"""
+
 quarterMap = {
     "Fall 2022": "4400",
     "Summer 2022": "4360",
