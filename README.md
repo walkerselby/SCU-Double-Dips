@@ -18,6 +18,6 @@
 
 ## Credits:
 
-- [Jason Vu (me)](https://github.com/javab3ans)
+- [Jason Vu](https://github.com/javab3ans): GUI Elements and Revisions
 
 - [Walker Selby](https://github.com/walkerselby/): Author and Programmer of [original concept](https://github.com/walkerselby/SCU-Double-Dips)
